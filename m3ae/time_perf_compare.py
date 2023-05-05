@@ -7,7 +7,7 @@ def cpu():
 
     startTime = time.time()
     with tf.device('/cpu:0'):
-        random_matrix_cpu = tf.random.uniform(shape=(30000, 30000), minval=0, maxval=1)
+        random_matrix_cpu = tf.random.uniform(shape=(10000, 10000), minval=0, maxval=1)
         dot_operation_cpu = tf.matmul(random_matrix_cpu, tf.transpose(random_matrix_cpu))
         sum_operation_cpu = tf.reduce_sum(dot_operation_cpu)
 
@@ -22,15 +22,15 @@ def cpu():
 def gpu():
 
     startTime = time.time()
-    with tf.device('/gpu:0'):
-        random_matrix_gpu = tf.random.uniform(shape=(30000, 30000), minval=0, maxval=1)
+    with tf.device('/tpu:0'):
+        random_matrix_gpu = tf.random.uniform(shape=(10000, 10000), minval=0, maxval=1)
         dot_operation_gpu = tf.matmul(random_matrix_gpu, tf.transpose(random_matrix_gpu))
         sum_operation_gpu = tf.reduce_sum(dot_operation_gpu)
 
     
     time_diff = time.time() - startTime
     print("\n" * 2)
-    print("GPU Time taken:", time_diff)
+    print("TPU Time taken:", time_diff)
     print("\n" * 2)
 
     return time_diff
